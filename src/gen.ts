@@ -27,11 +27,6 @@ export function generate(name: string, opts: IOptions): string {
 }
 
 function pipeline(o: ITheme, opts: IOptions) {
-  // genBase(o, opts);
-  // genButton(o, opts);
-  // genEditor(o, opts);
-  // genSideBar(o, opts);
-
   const {primary, secondary, dark, colorful} = opts;
   const primaryGray = getNaturalGray(primary);
 
@@ -72,10 +67,10 @@ function pipeline(o: ITheme, opts: IOptions) {
 
     // EditorGroups and Tabs
     'editorGroupHeader.tabsBackground': getColor(primary, 2, dark, colorful),
-    'tab.activeForeground': getSolidTextColor(primary, 12, colorful),
-    'tab.activeBackground': getRadixColor(primary, 9, dark),
-    // 'tab.activeBorderTop': getRadixColor(primary, 9, dark),
-    'tab.inactiveForeground': getColor(primary, 11, dark, colorful),
+    'tab.activeForeground': getColor(primaryGray, 12, dark, colorful),
+    'tab.activeBackground': getRadixColor(primary, 3, dark),
+    'tab.activeBorderTop': getRadixColor(primary, 9, dark),
+    'tab.inactiveForeground': getColor(primaryGray, 11, dark, colorful),
     'tab.inactiveBackground': getColor(primary, 1, dark, colorful),
 
     // TitleBar
@@ -86,55 +81,14 @@ function pipeline(o: ITheme, opts: IOptions) {
   o.tokenColors.push(
     ...generateTokenColors({
       foreground: getRadixColor(primaryGray, 11, dark),
-      variables_and_properties: getRadixColor(primary, 11, dark),
-      keywords: getRadixColor(primary, 11, dark),
+      variables_and_properties: getRadixColor(primaryGray, 11, dark),
+      keywords: getRadixColor(primaryGray, 11, dark),
+      comments: getRadixColor(primaryGray, 8, dark),
       classes_and_constants: getRadixColor(primary, 11, dark),
       functions_and_methods: getRadixColor(primary, 11, dark),
       numbers: getRadixColor(secondary, 11, dark),
       strings: getRadixColor(secondary, 11, dark),
-      operators_and_special_functions: getRadixColor(primary, 11, dark),
-      comments: getRadixColor(primaryGray, 8, dark),
+      operators_and_special_functions: getRadixColor(secondary, 11, dark),
     })
   );
 }
-
-// function tokenComments(opts: IOptions): Array<Record<string, any>> {
-//   const {primary, secondary, dark, colorful} = opts;
-//   const primaryGray = getNaturalGray(primary);
-//   const color = getRadixColor(primaryGray, 8, dark);
-
-//   const targets: Array<Record<string, any>> = [
-//     {
-//       name: 'Comment Markup Link',
-//       scope: 'comment markup.link',
-//       settings: {},
-//     },
-//     {
-//       name: 'comments',
-//       scope: ['beginning.punctuation.definition.list.markdown.xi'],
-//       settings: {},
-//     },
-//     {
-//       name: 'elements to dim',
-//       scope: ['punctuation.definition.tag.xi'],
-//       settings: {},
-//     },
-//     {
-//       name: 'Comments',
-//       scope: 'comment, punctuation.definition.comment',
-//       settings: {
-//         fontStyle: 'italic',
-//       },
-//     },
-//     {
-//       name: '[VSCODE-CUSTOM] Markdown Quote',
-//       scope: 'markup.quote.markdown',
-//       settings: {},
-//     },
-//   ];
-
-//   return targets.map(e => {
-//     e.settings.foreground = color;
-//     return e;
-//   });
-// }

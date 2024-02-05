@@ -39,5 +39,9 @@ main({
     {primary: 'sky', secondary: 'orange', dark: true, colorful: true},
     {primary: 'blue', secondary: 'purple', dark: true, colorful: true},
     {primary: 'blue', secondary: 'purple', dark: false, colorful: true},
+    {primary: 'indigo', secondary: 'blue', dark: true, colorful: true},
+    {primary: 'indigo', secondary: 'blue', dark: false, colorful: true},
+    {primary: 'grass', secondary: 'lime', dark: true, colorful: true},
+    {primary: 'grass', secondary: 'lime', dark: false, colorful: true},
   ],
 });
