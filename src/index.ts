@@ -1,13 +1,43 @@
-import * as colors from "@radix-ui/colors";
+import {IOptions, generate} from './gen';
+import {writeFileSync, mkdirSync} from 'fs';
+import {join} from 'path';
+import {generatePackageDotJSON, themeFilename, themeName} from './theme-pkg';
 
-const availableColors = [
-  ...new Set(
-    Object.keys(colors).map((e) =>
-      e.replace(/(Dark|A|DarkA|P3|DarkP3|P3A|DarkP3A)$/, "")
-    )
-  ),
-] as const;
-type AvailableColors = (typeof availableColors)[number];
-const colorSteps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+function generateAndWrite(opts: IOptions, themesDstDir: string) {
+  const name = themeName(opts);
+  const json = generate(name, opts);
+  const filename = themeFilename(opts);
+  console.log(json);
 
-console.log(availableColors);
+  writeFileSync(join(themesDstDir, filename), json, 'utf8');
+}
+
+interface IGeneratorOptions {
+  dstDir: string;
+  themesOptions: IOptions[];
+}
+
+function main(genOpts: IGeneratorOptions) {
+  const {dstDir, themesOptions} = genOpts;
+  const themesDstDir = join(dstDir, 'themes');
+
+  mkdirSync(themesDstDir, {recursive: true});
+
+  for (let i = 0; i < themesOptions.length; i++) {
+    const opts = themesOptions[i];
+    generateAndWrite(opts, themesDstDir);
+  }
+
+  const themePkg = generatePackageDotJSON(themesOptions);
+  writeFileSync(join(dstDir, 'package.json'), themePkg, 'utf8');
+}
+
+main({
+  dstDir: join('..', 'radix-vscode-color-theme'),
+  themesOptions: [
+    {primary: 'sky', secondary: 'blue', dark: true, colorful: true},
+    {primary: 'sky', secondary: 'orange', dark: true, colorful: true},
+    {primary: 'blue', secondary: 'purple', dark: true, colorful: true},
+    {primary: 'blue', secondary: 'purple', dark: false, colorful: true},
+  ],
+});
