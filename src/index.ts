@@ -11,6 +11,7 @@ pack({
   themesOptions: [
     {primary: 'sky', secondary: 'blue', dark: true, colorful: true},
     {primary: 'sky', secondary: 'orange', dark: true, colorful: true},
+    {primary: 'sky', secondary: 'orange', dark: false, colorful: true},
     {primary: 'blue', secondary: 'purple', dark: true, colorful: true},
     {primary: 'blue', secondary: 'purple', dark: false, colorful: true},
     {primary: 'indigo', secondary: 'blue', dark: true, colorful: true},
