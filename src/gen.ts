@@ -30,6 +30,16 @@ function pipeline(o: ITheme, opts: IOptions) {
   const {primary, secondary, dark, colorful} = opts;
   const primaryGray = getNaturalGray(primary);
 
+  const surface01 = getColor(primaryGray, 3, dark, colorful);
+  const surface02 = getColor(primaryGray, 4, dark, colorful);
+
+  const text01 = getColor(primaryGray, 11, dark, colorful, true);
+  const text02 = getColor(primaryGray, 12, dark, colorful, true);
+  const text03 = getColor(primary, 11, dark, colorful);
+  const text04 = getColor(primary, 12, dark, colorful);
+  const text05 = getColor(secondary, 11, dark, colorful);
+  const text06 = getColor(secondary, 12, dark, colorful);
+
   o.colors = {
     // Base
     foreground: getRadixColor(primaryGray, 11, dark),
@@ -55,15 +65,15 @@ function pipeline(o: ITheme, opts: IOptions) {
 
     // Editor
     'editor.foreground': getColor(primary, 11, dark, colorful),
-    'editor.background': getColor(primary, 2, dark, colorful),
+    'editor.background': surface02,
 
     // ActivityBar
     'activityBar.foreground': getColor(primary, 11, dark, colorful),
-    'activityBar.background': getColor(primary, 2, dark, colorful),
+    'activityBar.background': surface01,
 
     // SideBar
     // 'sideBar.foreground': getRadixColor(primaryGray, 11, dark),
-    'sideBar.background': getColor(primary, 2, dark, colorful),
+    'sideBar.background': surface01,
 
     // EditorGroups and Tabs
     'editorGroupHeader.tabsBackground': getColor(primary, 2, dark, colorful),
@@ -71,24 +81,29 @@ function pipeline(o: ITheme, opts: IOptions) {
     'tab.activeBackground': getRadixColor(primary, 3, dark),
     'tab.activeBorderTop': getRadixColor(primary, 9, dark),
     'tab.inactiveForeground': getColor(primaryGray, 11, dark, colorful),
-    'tab.inactiveBackground': getColor(primary, 1, dark, colorful),
+    'tab.inactiveBackground': surface01,
 
     // TitleBar
     'titleBar.activeForeground': getRadixColor(primaryGray, 11, dark),
-    'titleBar.activeBackground': getColor(primary, 1, dark, colorful),
+    'titleBar.activeBackground': surface01,
   };
 
   o.tokenColors.push(
     ...generateTokenColors({
-      foreground: getRadixColor(primaryGray, 11, dark),
-      variables_and_properties: getRadixColor(primaryGray, 11, dark),
-      keywords: getRadixColor(primaryGray, 11, dark),
-      comments: getRadixColor(primaryGray, 8, dark),
-      classes_and_constants: getRadixColor(primary, 11, dark),
-      functions_and_methods: getRadixColor(primary, 11, dark),
-      numbers: getRadixColor(secondary, 11, dark),
-      strings: getRadixColor(secondary, 11, dark),
-      operators_and_special_functions: getRadixColor(secondary, 11, dark),
+      comments: text01,
+
+      keywords: text02,
+
+      foreground: text03,
+      variables_and_properties: text03,
+
+      classes_and_constants: text04,
+      functions_and_methods: text04,
+
+      numbers: text05,
+      strings: text05,
+
+      operators_and_special_functions: text06,
     })
   );
 }
