@@ -27,6 +27,7 @@
     "typescript": "~5.2.0"
   },
   "dependencies": {
-    "@radix-ui/colors": "^3.0.0"
+    "@radix-ui/colors": "^3.0.0",
+    "dotenv": "^16.4.1"
   }
 }

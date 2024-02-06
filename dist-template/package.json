@@ -1,0 +1,26 @@
+{
+  "name": "radix-color-theme",
+  "displayName": "Radix color theme",
+  "description": "VSCode color theme based on Radix colors",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "sample dark theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/sample-dark-theme.json"
+      },
+      {
+        "label": "sample light theme",
+        "uiTheme": "vs",
+        "path": "./themes/sample-light-theme.json"
+      }
+    ]
+  }
+}
